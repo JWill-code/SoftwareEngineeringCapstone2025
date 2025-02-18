@@ -1,0 +1,323 @@
+// Code in C++
+
+// Reasons for our components
+/*
+
+Although our components are not fully fleshed out yet and just consist of ideas. First we have concrete factories for a fire and water level to represent different level
+types for more variety of levels. These concrete factories create concrete products for terrain and flora. Creating fire or water terrain and flora. This is the map
+building aspect for visuals. Next we have 2 concrete factories for level difficulty. One for easy difficulty and another for medium difficulty. These concrete factories
+build concrete products for enemy HP, enemy speed, enemy type, checkpoints, player weapon type, and player hit points. These are important for our game to add customizability
+and more features. Also adding replayability by allowing the player to play on a higher difficulty and further improve their skills. 
+
+*/
+
+
+
+
+
+
+#include <iostream>
+using namespace std;
+
+// Terrain class
+class Terrain{
+    public:
+    virtual void showTerrain() = 0;
+};
+class FireTerrain : public Terrain{
+    public:
+        void showTerrain(){
+            cout << "Show fire terrain" << endl;
+        }
+};
+class WaterTerrain : public Terrain{
+    public:
+        void showTerrain(){
+            cout << "Show water terrain" << endl;
+        }
+};
+
+//Flora class
+class Flora{
+    public:
+    virtual void showFlora() = 0;
+};
+class FireFlora : public Flora{
+    public:
+        void showFlora(){
+            cout << "Show fire flora" << endl;
+        }
+};
+class WaterFlora : public Flora{
+    public:
+        void showFlora(){
+            cout << "Show water flora" << endl;
+        }
+};
+
+// factory 2
+
+// Enemy Health Class
+class EnemyHealth{
+    public: 
+        virtual void setHealth() = 0;
+};
+class EasyHealth : public EnemyHealth{
+    public: 
+        void setHealth(){
+            cout << "Set enemy health to easy health." << endl;
+        }
+};
+class MediumHealth : public EnemyHealth{
+    public:
+        void setHealth(){
+            cout << "Set enemy health to medium health." << endl;
+        }
+};
+
+//Speed class
+class Speed{
+    public: 
+        virtual void setSpeed() = 0;
+};
+class EasySpeed : public Speed{
+    public: 
+        void setSpeed(){
+            cout << "Set enemy speed to easy speed." << endl;
+        }
+};
+class MediumSpeed : public Speed{
+    public:
+        void setSpeed(){
+            cout << "Set enemy speed to medium speed." << endl;
+        }
+};
+
+// Enemy Class
+class Enemy{
+    public: 
+        virtual void setEnemyDifficulty() = 0;
+};
+class EasyEnemy : public Enemy{
+    public: 
+        void setEnemyDifficulty(){
+            cout << "Enemy difficulty set to easy." << endl;
+        }
+};
+class MediumEnemy : public Enemy{
+    public:
+        void setEnemyDifficulty(){
+            cout << "Enemy difficulty set to medium." << endl;
+        }
+};
+
+//Checkpoint class
+class Checkpoint{
+    public: 
+        virtual void setCheckpoints() = 0;
+};
+class EasyCheckpoint : public Checkpoint{
+    public: 
+        void setCheckpoints(){
+            cout << "Easy Checkpoints, 2 checkpoints given." << endl;
+        }
+};
+class MediumCheckpoint : public Checkpoint{
+    public:
+        void setCheckpoints(){
+            cout << "Medium Checkpoints, 1 checkpoint given." << endl;
+        }
+};
+
+//Weapon class
+class Weapon{
+    public: 
+        virtual void setWeapon() = 0;
+};
+class EasyWeapon : public Weapon{
+    public: 
+        void setWeapon(){
+            cout << "Easy difficulty, You get the Master sword!." << endl;
+        }
+};
+class MediumWeapon : public Weapon{
+    public:
+        void setWeapon(){
+            cout << "Medium difficulty, You get the regular sword." << endl;
+        }
+};
+
+//Helth points class
+class HitPoint{
+    public: 
+        virtual void setHP() = 0;
+};
+class EasyHP : public HitPoint{
+    public: 
+        void setHP(){
+            cout << "Easy difficulty, You get 5 lives!." << endl;
+        }
+};
+class MediumHP : public HitPoint{
+    public:
+        void setHP(){
+            cout << "Medium difficulty, You get 3 lives." << endl;
+        }
+};
+
+
+
+
+
+class AFactory{
+    public:
+        virtual Terrain* createTerrain() = 0;
+        virtual Flora* createFlora() = 0;        
+        virtual EnemyHealth* createHealth() = 0;
+        virtual Speed* createSpeed() = 0;
+        virtual Enemy* createEnemy() = 0;
+        virtual Checkpoint* createCheckpoint() = 0;
+        virtual Weapon* createWeapon() = 0;
+        virtual HitPoint* createHP() = 0;
+};
+
+class FireFactory : public AFactory{
+    public:
+    Terrain* createTerrain(){
+        return new FireTerrain();
+    }
+    Flora* createFlora(){
+        return new FireFlora();
+    }
+    EnemyHealth* createHealth(){}
+    Speed* createSpeed(){}
+    Enemy* createEnemy(){}
+    Checkpoint* createCheckpoint(){}
+    Weapon* createWeapon(){}
+    HitPoint* createHP(){}
+};
+
+class WaterFactory : public AFactory{
+    public:
+    Terrain* createTerrain(){
+        return new WaterTerrain();
+    }
+    Flora* createFlora(){
+        return new WaterFlora();
+    }
+    EnemyHealth* createHealth(){}
+    Speed* createSpeed(){}
+    Enemy* createEnemy(){}
+    Checkpoint* createCheckpoint(){}
+    Weapon* createWeapon(){}
+    HitPoint* createHP(){}
+};
+
+class EasyFactory : public AFactory{
+    public:
+    Terrain* createTerrain(){}
+    Flora* createFlora(){}
+    EnemyHealth* createHealth(){
+        return new EasyHealth();
+    }
+    Speed* createSpeed(){
+        return new EasySpeed();
+    }
+    Enemy* createEnemy(){
+        return new EasyEnemy();
+    }
+    Checkpoint* createCheckpoint(){
+        return new EasyCheckpoint();
+    }
+    Weapon* createWeapon(){
+        return new EasyWeapon();
+    }
+    HitPoint* createHP(){
+        return new EasyHP();
+    }
+};
+
+class MediumFactory : public AFactory{
+    public:
+    Terrain* createTerrain(){}
+    Flora* createFlora(){}
+    EnemyHealth* createHealth(){
+        return new MediumHealth();
+    }
+    Speed* createSpeed(){
+        return new MediumSpeed();
+    }
+    Enemy* createEnemy(){
+        return new MediumEnemy();
+    }
+    Checkpoint* createCheckpoint(){
+        return new MediumCheckpoint();
+    }
+    Weapon* createWeapon(){
+        return new MediumWeapon();
+    }
+    HitPoint* createHP(){
+        return new MediumHP();
+    }
+};
+
+
+//chooses which factory to use
+class GUIAbstractFActory{
+    public: 
+        static AFactory* CreateFactory(string input){
+            if(input == "fire"){
+                return new FireFactory();
+            }
+            else if(input == "water"){
+                return new WaterFactory();
+            }
+            else if(input == "easy"){
+                return new EasyFactory();
+            }
+            else if(input == "medium"){
+                return new MediumFactory();
+            }
+        }
+};
+
+
+int main() {
+    // map factory
+    cout<<"Enter your level type (fire or water): "<<endl;
+    string userInput;
+    cin >> userInput;
+    AFactory* fact = GUIAbstractFActory::CreateFactory(userInput);
+    Terrain* terrain = fact->createTerrain();
+    terrain->showTerrain();
+    Flora* flora = fact->createFlora();
+    flora->showFlora();
+
+    // difficulty factory
+    cout<<"Enter your level difficulty (easy or medium): "<<endl;
+    cin >> userInput;
+    AFactory* fact2 = GUIAbstractFActory::CreateFactory(userInput);
+    EnemyHealth* health = fact2->createHealth();
+    health->setHealth();
+    Speed* speed = fact2->createSpeed();
+    speed->setSpeed();
+
+    //enemy type factory
+//    cout<<"Enter your enemy difficulty (easy or medium): "<<endl;
+//    cin >> userInput;
+//    AFactory* fact3 = GUIAbstractFActory::CreateFactory(userInput);
+    Enemy* enemy = fact2->createEnemy();
+    enemy->setEnemyDifficulty();
+    Checkpoint* checkpoint = fact2->createCheckpoint();
+    checkpoint->setCheckpoints();
+
+    //weapon factory
+ //   cout<<"Enter your level difficulty (easy or medium): "<<endl;
+ //   cin >> userInput;
+ //   AFactory* fact4 = GUIAbstractFActory::CreateFactory(userInput);
+    Weapon* weapon = fact2->createWeapon();
+    weapon->setWeapon();
+    HitPoint* hp = fact2->createHP();
+    hp->setHP();
+    return 0;
+};
