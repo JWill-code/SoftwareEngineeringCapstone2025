@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://coabwcwg1q3l0"]
+
+[node name="MainNode" type="Node2D"]
+
+[node name="PlayerAvatar" type="Area2D" parent="."]
