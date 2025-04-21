@@ -21,4 +21,6 @@ region_enabled = true
 region_rect = Rect2(464, 48, 16, 16)
 region_filter_clip_enabled = true
 
+[node name="RayCast2D" type="RayCast2D" parent="."]
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
