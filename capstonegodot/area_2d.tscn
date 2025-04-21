@@ -1,26 +1,24 @@
 [gd_scene load_steps=4 format=3 uid="uid://b8wbkcyx56ff3"]
 
 [ext_resource type="Script" path="res://Area2d4Avatar.cs" id="1_3qpil"]
+[ext_resource type="Texture2D" uid="uid://28vlhirkwt4" path="res://colored-transparent_packed.png" id="2_441ln"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_cmyuf"]
-animations = [{
-"frames": [],
-"loop": true,
-"name": &"move1",
-"speed": 5.0
-}]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_od3r1"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_enprh"]
+size = Vector2(16, 16)
 
 [node name="UserAvatar" type="Area2D"]
 script = ExtResource("1_3qpil")
 metadata/_edit_group_ = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_cmyuf")
-animation = &"move1"
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_od3r1")
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_enprh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_441ln")
+centered = false
+region_enabled = true
+region_rect = Rect2(464, 48, 16, 16)
+region_filter_clip_enabled = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
